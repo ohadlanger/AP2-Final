@@ -1,4 +1,4 @@
-package com.example.whatsapp_application;
+package com.example.whatsapp_application.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,8 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
+import com.example.whatsapp_application.R;
 import com.example.whatsapp_application.entities.DetailedUser;
-import com.example.whatsapp_application.entities.User;
 import com.example.whatsapp_application.repositories.MessageRepository.UserRepository;
 
 public class SignUpActivity extends AppCompatActivity {

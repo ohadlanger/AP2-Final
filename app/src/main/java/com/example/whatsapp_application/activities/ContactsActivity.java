@@ -1,8 +1,10 @@
-package com.example.whatsapp_application;
+package com.example.whatsapp_application.activities;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.whatsapp_application.R;
 
 public class ContactsActivity extends AppCompatActivity {
 

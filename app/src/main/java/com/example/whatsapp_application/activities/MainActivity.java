@@ -1,4 +1,4 @@
-package com.example.whatsapp_application;
+package com.example.whatsapp_application.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
+import com.example.whatsapp_application.R;
 import com.example.whatsapp_application.entities.Message;
 import com.example.whatsapp_application.entities.User;
 import com.example.whatsapp_application.repositories.MessageRepository.LoginRepository;
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         MutableLiveData<String> token = new MutableLiveData<>();
         MutableLiveData<List<Message>> messages = new MutableLiveData<>();
         LoginRepository loginRepository = new LoginRepository(this);
+
         loginRepository.createToken("string", "string", token);
         MutableLiveData<User> user = new MutableLiveData<>();
         token.observe(this, s -> {
