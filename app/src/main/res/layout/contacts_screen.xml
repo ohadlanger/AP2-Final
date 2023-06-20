@@ -35,7 +35,7 @@
             android:layout_marginTop="20dp">
 
             <ImageView
-                android:id="@+id/pictureIv"
+                android:id="@+id/userProfilePic"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:src="@drawable/person_icon"
@@ -116,11 +116,13 @@
             android:textColor="#FFFFFF"/>
 
         <ScrollView
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/archiveBtn">
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/lstContacts"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"

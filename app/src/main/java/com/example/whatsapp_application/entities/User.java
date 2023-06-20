@@ -1,5 +1,7 @@
 package com.example.whatsapp_application.entities;
 
+import android.graphics.Bitmap;
+
 public class User {
     private String username;
     private String displayName;
@@ -19,7 +21,7 @@ public class User {
         return displayName;
     }
 
-    public String getProfilePic() {
+    public Bitmap getProfilePic() {
         return profilePic;
     }
 

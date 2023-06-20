@@ -23,7 +23,6 @@ public class ContactsViewModel extends ViewModel {
         chats = new MutableLiveData<>();
 
     }
-
 public LiveData<List<Chat>> getChats(String token) {
         // update the chats in the repository
         chatRepository.getAllChats(token, chats);
