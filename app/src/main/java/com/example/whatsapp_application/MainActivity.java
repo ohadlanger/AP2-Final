@@ -18,13 +18,12 @@ import com.example.whatsapp_application.repositories.MessageRepository.UserRepos
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private Intent details;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_screen);
         MutableLiveData<String> token = new MutableLiveData<>();
-        details = new Intent(getApplicationContext(), ContactsActivity.class);
         MutableLiveData<List<Message>> messages = new MutableLiveData<>();
         LoginRepository loginRepository = new LoginRepository(this);
         loginRepository.createToken("string", "string", token);
@@ -63,8 +62,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onChanged(User newValue) {
                         if (newValue != null) {
-                            details.putExtra("user", (CharSequence) newValue);
-                            startActivity(details);
+                            Intent intent1 = new Intent(getApplicationContext(), ContactsActivity.class);
+                            startActivity(intent1);
                             finishAffinity();
                         } else {
                             Toast.makeText(getApplicationContext(), "Invalid information. Try again!", Toast.LENGTH_SHORT).show();
@@ -89,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
             token.observe(this, new Observer<String>() {
                 @Override
                 public void onChanged(String newValue) {
-                    details.putExtra("token", newValue);
                     userRepository.getUser(username, "Bearer " + newValue, user);
                 }
             });
