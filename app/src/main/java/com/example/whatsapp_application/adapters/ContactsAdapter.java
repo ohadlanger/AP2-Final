@@ -40,10 +40,8 @@ public class ContactsAdapter  extends RecyclerView.Adapter<ContactsAdapter.Conta
             contactImage = itemView.findViewById(R.id.contactImage);
             lastMessage = itemView.findViewById(R.id.lastMessage);
             lastMessageTime = itemView.findViewById(R.id.lastMessageTime);
-
         }
     }
-
     private final LayoutInflater layoutInflater;
     private List<Chat> chats;
 
@@ -63,16 +61,17 @@ public class ContactsAdapter  extends RecyclerView.Adapter<ContactsAdapter.Conta
             holder.contactName.setText(current.getUser().getUsername());
             // set the image from a string to a bitmap convert to bitmap
             String image = current.getUser().getProfilePic();
-                // convert the string to a bitmap
-//                if (image != null) {
-//                    byte[] decodedString = Base64.decode(image, Base64.DEFAULT);
-//                    Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-//                    holder.contactImage.setImageBitmap(bitmap);
-//                }
-
+            // convert the string to a bitmap
+            if (false && image != null) {
+                byte[] decodedString = Base64.decode(image, Base64.DEFAULT);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                holder.contactImage.setImageBitmap(bitmap);
+            }
+            if(current.getLastMessage() != null) {
                 holder.lastMessage.setText(current.getLastMessage().getContent());
                 holder.lastMessageTime.setText(current.getLastMessage().getCreated());
-            } else {
+            }
+            }else {
                 // Covers the case of data not being ready yet.
                 holder.contactName.setText("No User");
             }
@@ -86,11 +85,10 @@ public class ContactsAdapter  extends RecyclerView.Adapter<ContactsAdapter.Conta
     public List<Chat> getChats() {
         return chats;
     }
+
     public void setChats(List<Chat> chats) {
         this.chats = chats;
         notifyDataSetChanged();
     }
-
-
 
 }

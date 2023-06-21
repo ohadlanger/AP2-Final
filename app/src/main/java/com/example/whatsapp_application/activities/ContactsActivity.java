@@ -39,7 +39,7 @@ public class ContactsActivity extends AppCompatActivity {
         String username = getIntent().getStringExtra("username");
         String displayName = getIntent().getStringExtra("displayname");
 
-//        String image = getIntent().getStringExtra("picture");
+        String image = getIntent().getStringExtra("picture");
 //        UsernameView = findViewById(R.id.username);
 //        displayNameView = findViewById(R.id.displayName);
         if (username == null || displayName == null || token == null) {
@@ -52,11 +52,11 @@ public class ContactsActivity extends AppCompatActivity {
 //        displayNameView.setText(displayName);
         // set the profile pic
 
-//        if (image != null) {
-//            byte[] decodedString = Base64.decode(image, Base64.DEFAULT);
-//            Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-//            profilePic.setImageBitmap(bitmap);
-//        }
+        if (false && image != null) {
+            byte[] decodedString = Base64.decode(image, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            profilePic.setImageBitmap(bitmap);
+        }
         ContactsViewModel contactsViewModel = new ViewModelProvider(this).get(ContactsViewModel.class);
 
         RecyclerView lstContacts = findViewById(R.id.lstContacts);
@@ -67,18 +67,11 @@ public class ContactsActivity extends AppCompatActivity {
         lstContacts.setAdapter(adapter);
         // set the layout manager
         lstContacts.setLayoutManager(new LinearLayoutManager(this));
-        List<Chat> a = new ArrayList<>();
-        a.add(new Chat(1, new User("a", "a","a")));
-        a.add(new Chat(2, new User("b", "b","b")));
-        a.add(new Chat(3, new User("c", "c","c")));
-        a.add(new Chat(4, new User("d", "d","d")));
-        adapter.setChats(a);
         // set the observer
-//        contactsViewModel.getChats(token).observe(this, chats -> {
-//            // update the cached copy of the words in the adapter.
-//            adapter.setChats(chats);
-//        });
-    }
-    //dada
 
+        contactsViewModel.getChats("Bearer " + token).observe(this, chats -> {
+            // update the cached copy of the words in the adapter.
+            adapter.setChats(chats);
+        });
+    }
 }
