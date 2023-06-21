@@ -21,7 +21,7 @@ public class User {
         return displayName;
     }
 
-    public Bitmap getProfilePic() {
+    public String getProfilePic() {
         return profilePic;
     }
 

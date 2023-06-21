@@ -21,7 +21,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            app:layout_constraintLeft_toRightOf="@+id/pictureIv"
+            app:layout_constraintLeft_toRightOf="@+id/contactImage"
             android:layout_marginLeft="10dp"
             android:orientation="vertical">
 

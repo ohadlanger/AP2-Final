@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item name="contactName" type="id">contactName</item>
-    <item name="contactImage" type="id">contactImage</item>
-    <item name="lastMessage" type="id">lastMessage</item>
-    <item name="lastMessageTime" type="id">lastMessageTime</item>
-    <item name="username" type="id">username</item>
-    <item name="displayName" type="id">displayName</item>
-    <item name="userProfilePic" type="id">userProfilePic</item>
+    <item name="contactName" type="id"></item>
+    <item name="contactImage" type="id"></item>
+    <item name="lastMessage" type="id"></item>
+    <item name="lastMessageTime" type="id"></item>
+    <item name="username" type="id"></item>
+    <item name="displayName" type="id"></item>
+    <item name="userProfilePic" type="id"></item>
 </resources>

@@ -20,8 +20,6 @@ public class Chat {
         this.user = user;
     }
 
-    public Chat() {
-    }
 
     public int getId() {
         return id;

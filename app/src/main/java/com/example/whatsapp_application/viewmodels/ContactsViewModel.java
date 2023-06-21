@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.whatsapp_application.activities.MyApplication;
 import com.example.whatsapp_application.entities.Chat;
 import com.example.whatsapp_application.repositories.MessageRepository.ChatRepository;
 
@@ -18,8 +19,11 @@ public class ContactsViewModel extends ViewModel {
     MutableLiveData<List<Chat>> chats;
     private final ChatRepository chatRepository;
 
-    public ContactsViewModel(Context context) {
-        this.chatRepository = new ChatRepository(context);
+
+    public ContactsViewModel() {
+        this.chatRepository = new ChatRepository(
+            MyApplication.getContext()
+        );
         chats = new MutableLiveData<>();
 
     }

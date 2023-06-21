@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.whatsapp_application.R;
 import com.example.whatsapp_application.entities.Chat;
-
+import android.util.Base64;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import java.util.List;
 
 public class ContactsAdapter  extends RecyclerView.Adapter<ContactsAdapter.ContactsViewHolder>{
@@ -59,7 +61,15 @@ public class ContactsAdapter  extends RecyclerView.Adapter<ContactsAdapter.Conta
         if (chats != null) {
             final Chat current = chats.get(position);
             holder.contactName.setText(current.getUser().getUsername());
-            holder.contactImage.setImageBitmap(current.getUser().getProfilePic());
+            // set the image from a string to a bitmap convert to bitmap
+            String image = current.getUser().getProfilePic();
+            // convert the string to a bitmap
+            if (image != null) {
+                byte[] decodedString = Base64.decode(image, Base64.DEFAULT);
+                Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                holder.contactImage.setImageBitmap(bitmap);
+            }
+
             holder.lastMessage.setText(current.getLastMessage().getContent());
             holder.lastMessageTime.setText(current.getLastMessage().getCreated());
         } else {
