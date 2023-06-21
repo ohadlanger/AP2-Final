@@ -67,12 +67,17 @@ public class ContactsActivity extends AppCompatActivity {
         lstContacts.setAdapter(adapter);
         // set the layout manager
         lstContacts.setLayoutManager(new LinearLayoutManager(this));
-
+        List<Chat> a = new ArrayList<>();
+        a.add(new Chat(1, new User("a", "a","a")));
+        a.add(new Chat(2, new User("b", "b","b")));
+        a.add(new Chat(3, new User("c", "c","c")));
+        a.add(new Chat(4, new User("d", "d","d")));
+        adapter.setChats(a);
         // set the observer
-        contactsViewModel.getChats(token).observe(this, chats -> {
-            // update the cached copy of the words in the adapter.
-            adapter.setChats(chats);
-        });
+//        contactsViewModel.getChats(token).observe(this, chats -> {
+//            // update the cached copy of the words in the adapter.
+//            adapter.setChats(chats);
+//        });
     }
     //dada
 

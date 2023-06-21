@@ -63,24 +63,24 @@ public class ContactsAdapter  extends RecyclerView.Adapter<ContactsAdapter.Conta
             holder.contactName.setText(current.getUser().getUsername());
             // set the image from a string to a bitmap convert to bitmap
             String image = current.getUser().getProfilePic();
-            // convert the string to a bitmap
-            if (image != null) {
-                byte[] decodedString = Base64.decode(image, Base64.DEFAULT);
-                Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                holder.contactImage.setImageBitmap(bitmap);
-            }
+                // convert the string to a bitmap
+//                if (image != null) {
+//                    byte[] decodedString = Base64.decode(image, Base64.DEFAULT);
+//                    Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+//                    holder.contactImage.setImageBitmap(bitmap);
+//                }
 
-            holder.lastMessage.setText(current.getLastMessage().getContent());
-            holder.lastMessageTime.setText(current.getLastMessage().getCreated());
-        } else {
-            // Covers the case of data not being ready yet.
-            holder.contactName.setText("No User");
-        }
+                holder.lastMessage.setText(current.getLastMessage().getContent());
+                holder.lastMessageTime.setText(current.getLastMessage().getCreated());
+            } else {
+                // Covers the case of data not being ready yet.
+                holder.contactName.setText("No User");
+            }
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return chats != null ? chats.size() : 0;
     }
 
     public List<Chat> getChats() {
