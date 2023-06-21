@@ -74,5 +74,6 @@ public class ContactsActivity extends AppCompatActivity {
             adapter.setChats(chats);
         });
     }
+    //dada
 
 }
