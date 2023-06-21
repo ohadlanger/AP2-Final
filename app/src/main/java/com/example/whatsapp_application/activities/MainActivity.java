@@ -1,5 +1,5 @@
-package com.example.whatsapp_application;
 
+package com.example.whatsapp_application.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
+import com.example.whatsapp_application.R;
 import com.example.whatsapp_application.entities.Message;
 import com.example.whatsapp_application.entities.User;
 import com.example.whatsapp_application.repositories.MessageRepository.LoginRepository;
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_screen);
         MutableLiveData<String> token = new MutableLiveData<>();
-        details = new Intent(getApplicationContext(), ContactsActivity.class);
+        details = new Intent(MyApplication.getContext(), ContactsActivity.class);
         MutableLiveData<List<Message>> messages = new MutableLiveData<>();
         LoginRepository loginRepository = new LoginRepository(this);
         loginRepository.createToken("string", "string", token);
@@ -52,29 +53,30 @@ public class MainActivity extends AppCompatActivity {
         EditText passwordEt = findViewById(R.id.passwordEt);
         Button registerBtn = findViewById(R.id.registerBtn);
 
-        registerBtn.setOnClickListener(view -> {
+        registerBtn.setOnClickListener(view -> { // on an connection attempt
             String username = usernameEt.getText().toString();
             String password = passwordEt.getText().toString();
             if (!username.isEmpty() && !password.isEmpty()) {
-                MutableLiveData<User> result = new MutableLiveData<>();
-                result.setValue(null);
+                MutableLiveData<User> result = new MutableLiveData<>(); //  user object to listen to
 
-                result.observe(this, new Observer<User>() {
+                result.observe(this, new Observer<User>() { //  handle when updated (found)
                     @Override
                     public void onChanged(User newValue) {
-                        if (newValue != null) {
-                            details.putExtra("user", (CharSequence) newValue);
+                        if (newValue != null) { //  user exists
+                            details.putExtra("username", newValue.getUsername());
+                            details.putExtra("displayname", newValue.getDisplayName());
+                            details.putExtra("picture", newValue.getProfilePic());
                             startActivity(details);
                             finishAffinity();
-                        } else {
+                        } else {    //  user does not exist
                             Toast.makeText(getApplicationContext(), "Invalid information. Try again!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
 
-                VerifyLogin(username, password, result);
+                VerifyLogin(username, password, result);    //  check information
             }
-            else {
+            else {  //  not all fields were filled
                 Toast.makeText(getApplicationContext(), "Missing requirements. Try again!", Toast.LENGTH_SHORT).show();
             }
         });
@@ -84,17 +86,17 @@ public class MainActivity extends AppCompatActivity {
         if(!username.isEmpty() && !password.isEmpty()) {
             UserRepository userRepository = new UserRepository();
             LoginRepository loginRepository = new LoginRepository(getApplicationContext());
-            MutableLiveData<String> token = new MutableLiveData<>();
+            MutableLiveData<String> token = new MutableLiveData<>();    //  will receive the token from database
 
-            token.observe(this, new Observer<String>() {
+            token.observe(this, new Observer<String>() {    //  handle return of token
                 @Override
                 public void onChanged(String newValue) {
                     details.putExtra("token", newValue);
-                    userRepository.getUser(username, "Bearer " + newValue, user);
+                    userRepository.getUser(username, "Bearer " + newValue, user); // update user with token
                 }
             });
 
-            loginRepository.createToken(username, password, token);
+            loginRepository.createToken(username, password, token); //  request token
         }
     }
 }
