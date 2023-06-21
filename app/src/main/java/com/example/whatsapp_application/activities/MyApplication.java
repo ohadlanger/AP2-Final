@@ -11,11 +11,20 @@ public class MyApplication extends Application {
                 return token;
         }
 
+        public static void setUser(User user) {
+                MyApplication.user = user;
+        }
+
         public static User getUser() {
                 return user;
         }
 
         public static Context context;
+
+        public static void setContext(Context context) {
+                MyApplication.context = context;
+        }
+
         public static String token;
         public static User user;
 
@@ -27,9 +36,17 @@ public class MyApplication extends Application {
         public void onCreate() {
                 super.onCreate();
                 context = getApplicationContext();
-                token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFyaWVsIiwiaWF0IjoxNjg3MzQxNjQwLCJleHAiOjE2ODczNDUyNDB9.hTYCj__te9R8f257rwYMtcJokDJPGy_V1bk4xpKRbsM";
+                token = null;
                 // create a user object
-                user = new User("ariel", "Ari123a123!", "");
+                user = null;
         }
+        public static void setToken(String token) {
+                MyApplication.token = token;
+        }
+        public static String getUserName() {
+                return user.getUsername();
+        }
+
+
 
 }

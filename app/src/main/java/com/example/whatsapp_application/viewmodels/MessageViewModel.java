@@ -2,6 +2,7 @@ package com.example.whatsapp_application.viewmodels;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.example.whatsapp_application.activities.MyApplication;
 import com.example.whatsapp_application.entities.Message;
@@ -9,9 +10,7 @@ import com.example.whatsapp_application.repositories.MessageRepository.MessageRe
 
 import java.util.List;
 
-public class MessageViewModel {
-
-
+public class MessageViewModel extends ViewModel {
 
     MutableLiveData<List<Message>> messages;
     private final MessageRepository messageRepository;

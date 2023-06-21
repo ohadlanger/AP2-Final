@@ -7,4 +7,6 @@
     <item name="username" type="id"></item>
     <item name="displayName" type="id"></item>
     <item name="userProfilePic" type="id"></item>
+    <item name="messageText" type="id" />
+    <item name="messageTime" type="id" />
 </resources>
