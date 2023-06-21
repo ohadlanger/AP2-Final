@@ -27,16 +27,16 @@ public interface WebServiceApi {
     Call<CompressChat> createChat(@Body ChatRequest chatRequest, @Header("Authorization") String token);
 
     @GET("api/Chats/{id}")
-    Call<DetailedChat> getChat(@Path("id") int chatId, @Header("Authorization") String token);
+    Call<DetailedChat> getChat(@Path("id") String chatId, @Header("Authorization") String token);
 
     @DELETE("api/Chats/{id}")
-    Call<Void> deleteChat(@Path("id") int chatId, @Header("Authorization") String token);
+    Call<Void> deleteChat(@Path("id") String chatId, @Header("Authorization") String token);
 
     @POST("api/Chats/{id}/Messages")
-    Call<Message> createMessage(@Path("id") int chatId, @Body String msg , @Header("Authorization") String token);
+    Call<Message> createMessage(@Path("id") String chatId, @Body String msg , @Header("Authorization") String token);
 
     @GET("api/Chats/{id}/Messages")
-    Call<List<Message>> getAllMessages(@Path("id") int chatId, @Header("Authorization") String token);
+    Call<List<Message>> getAllMessages(@Path("id") String chatId, @Header("Authorization") String token);
 
     @POST("api/Tokens")
     Call<String> createToken(@Body TokenRequest tokenRequest);

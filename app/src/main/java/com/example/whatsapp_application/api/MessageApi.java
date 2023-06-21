@@ -30,7 +30,7 @@ public class MessageApi {
         this.messageDao = messageDao;
     }
 
-    public void createMessage(int chatId, String msg, String token, MutableLiveData<List<Message>> messageData) {
+    public void createMessage(String chatId, String msg, String token, MutableLiveData<List<Message>> messageData) {
         Call<Message> call = webServiceAPI.createMessage(chatId, msg , token);
         call.enqueue(new Callback<Message>() {
             @Override
@@ -53,7 +53,7 @@ public class MessageApi {
         });
     }
 
-    public void getAllMessages(int chatId, String token, MutableLiveData<List<Message>> messageData) {
+    public void getAllMessages(String chatId, String token, MutableLiveData<List<Message>> messageData) {
         Call<List<Message>> call = webServiceAPI.getAllMessages(chatId, token);
         call.enqueue(new Callback<List<Message>>() {
             @Override

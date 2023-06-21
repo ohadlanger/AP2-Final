@@ -9,16 +9,17 @@ import com.example.whatsapp_application.room.Converters;
 @Entity(tableName = "messages")
 public class Message {
     @PrimaryKey()
-    private int id;
+    private int PrimaryKey;
+    private String id;
 
     private String created;
     @TypeConverters(Converters.class)
     private User sender;
 
     private String content;
-    private int chatId;
+    private String chatId;
 
-    public Message(int id, int chatId, User sender, String content, String created) {
+    public Message(String id, String chatId, User sender, String content, String created) {
         this.id = id;
         this.chatId = chatId;
         this.sender = sender;
@@ -26,11 +27,11 @@ public class Message {
         this.created = created;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public int getChatId() {
+    public String getChatId() {
         return chatId;
     }
 
@@ -46,11 +47,11 @@ public class Message {
         return created;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public void setChatId(int chatId) {
+    public void setChatId(String chatId) {
         this.chatId = chatId;
     }
 
@@ -64,5 +65,13 @@ public class Message {
 
     public void setCreated(String created) {
         this.created = created;
+    }
+
+    public int getPrimaryKey() {
+        return PrimaryKey;
+    }
+
+    public void setPrimaryKey(int primaryKey) {
+        PrimaryKey = primaryKey;
     }
 }

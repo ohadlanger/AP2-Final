@@ -8,20 +8,20 @@ import com.example.whatsapp_application.room.Converters;
 
 @Entity(tableName = "chats")
 public class Chat {
-    @PrimaryKey()
-    private int id;
+    @PrimaryKey(autoGenerate = true)
+    private int PrimaryKey;
+    private String id;
     @TypeConverters(Converters.class)
     private User user;
     @TypeConverters(Converters.class)
     private Message lastMessage;
 
-    public Chat(int id, User user) {
+    public Chat(String id, User user) {
         this.id = id;
         this.user = user;
     }
 
-
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -32,7 +32,7 @@ public class Chat {
         return lastMessage;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -41,6 +41,14 @@ public class Chat {
     }
     public void setLastMessage(Message lastMessage) {
         this.lastMessage = lastMessage;
+    }
+
+    public int getPrimaryKey() {
+        return PrimaryKey;
+    }
+
+    public void setPrimaryKey(int primaryKey) {
+        PrimaryKey = primaryKey;
     }
 }
 

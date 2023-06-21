@@ -81,7 +81,7 @@ public class ChatApi {
         });
     }
 
-    public void getChat(int chatId, String token) {
+    public void getChat(String chatId, String token) {
         Call<DetailedChat> call = webServiceAPI.getChat(chatId, token);
         call.enqueue(new Callback<DetailedChat>() {
             @Override
@@ -100,7 +100,7 @@ public class ChatApi {
         });
     }
 
-    public void deleteChat(int chatId, String token) {
+    public void deleteChat(String chatId, String token) {
         Call<Void> call = webServiceAPI.deleteChat(chatId, token);
     }
 }

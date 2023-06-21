@@ -18,10 +18,10 @@ public interface MessageDao {
     void insertAll(Message... messages);
 
     @Query("SELECT * FROM messages WHERE chatId = :chatId")
-    List<Message> getAllMessages(int chatId);
+    List<Message> getAllMessages(String chatId);
 
     @Query("DELETE FROM messages WHERE chatId = :chatId")
-    void clear(int chatId);
+    void clear(String chatId);
 
     @Query("DELETE FROM messages")
     void clearALL();

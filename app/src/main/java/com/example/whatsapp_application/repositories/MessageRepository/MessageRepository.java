@@ -23,11 +23,11 @@ public class MessageRepository {
         this.messageApi = new MessageApi(this.messageDao);
     }
 
-    public void createMessage(int chatId, String msg, String token, MutableLiveData<List<Message>> messageData) {
+    public void createMessage(String chatId, String msg, String token, MutableLiveData<List<Message>> messageData) {
         messageApi.createMessage(chatId, msg , token, messageData);
     }
 
-    public void getAllMessages(int chatId, String token, MutableLiveData<List<Message>> messageData) {
+    public void getAllMessages(String chatId, String token, MutableLiveData<List<Message>> messageData) {
         messageData.setValue(messageDao.getAllMessages(chatId));
         messageApi.getAllMessages(chatId, token, messageData);
     }
