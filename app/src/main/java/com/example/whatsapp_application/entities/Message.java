@@ -4,6 +4,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
+import com.example.whatsapp_application.activities.MyApplication;
 import com.example.whatsapp_application.room.Converters;
 
 @Entity(tableName = "messages")
@@ -67,10 +68,13 @@ public class Message {
         this.created = created;
     }
 
+    public boolean isReceived() {
+        return sender.getUsername().equals(MyApplication.getUser().getUsername());
+
+    }
     public int getPrimaryKey() {
         return PrimaryKey;
     }
-
     public void setPrimaryKey(int primaryKey) {
         PrimaryKey = primaryKey;
     }
