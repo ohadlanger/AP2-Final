@@ -1,17 +1,17 @@
 package com.example.whatsapp_application.entities;
 
 public class ShortMessage {
-    private int id;
+    private String id;
     private String created;
     private String content;
 
-    public ShortMessage(int id, String created, String content) {
+    public ShortMessage(String id, String created, String content) {
         this.id = id;
         this.created = created;
         this.content = content;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 

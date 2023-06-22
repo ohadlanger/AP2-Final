@@ -11,7 +11,7 @@ import com.example.whatsapp_application.entities.Chat;
 import com.example.whatsapp_application.entities.LoginDetail;
 import com.example.whatsapp_application.entities.Message;
 
-@Database(entities = {Chat.class, Message.class, LoginDetail.class}, version = 1)
+@Database(entities = {Chat.class, Message.class, LoginDetail.class}, version = 3)
 @TypeConverters({Converters.class})
     public abstract class ChatDatabase extends RoomDatabase {
     public abstract ChatDao chatDao();
@@ -24,7 +24,9 @@ import com.example.whatsapp_application.entities.Message;
         if (instance == null) {
             instance = Room.databaseBuilder(context,
                             ChatDatabase.class, "chat_database")
-                    .allowMainThreadQueries().build();
+                    .allowMainThreadQueries()
+                    .fallbackToDestructiveMigration()
+                    .build();
         }
         return instance;
     }

@@ -33,13 +33,13 @@ public class ChatRepository {
         chatApi.createChat(chatRequest, token, chatData);
     }
 
-    public void getChat(int chatId, String token) {
+    public void getChat(String chatId, String token) {
         chatApi.getChat(chatId, token);
     }
 
 
 
-    public void deleteChat(int chatId, String token) {
+    public void deleteChat(String chatId, String token) {
         chatApi.deleteChat(chatId, token);
     }
 

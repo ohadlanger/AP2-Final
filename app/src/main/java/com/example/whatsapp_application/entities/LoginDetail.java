@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 public class LoginDetail {
 
     @PrimaryKey(autoGenerate = true)
-    int id;
+    private int id;
     private String username;
     private String password;
 
@@ -40,4 +40,5 @@ public class LoginDetail {
     public void setId(int id){
         this.id = id;
     }
+
 }

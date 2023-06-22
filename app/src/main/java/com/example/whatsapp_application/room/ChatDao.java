@@ -20,7 +20,7 @@ public interface ChatDao {
     List<Chat> getAllChats();
 
     @Query("SELECT * FROM chats WHERE id = :chatId")
-    Chat getChat(int chatId);
+    Chat getChat(String chatId);
 
     @Query("DELETE FROM chats")
     void clear();

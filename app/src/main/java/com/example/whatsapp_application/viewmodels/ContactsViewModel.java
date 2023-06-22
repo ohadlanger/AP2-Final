@@ -37,7 +37,7 @@ public void createChat(String username, String token) {
         chatRepository.createChat(username, token, chats);
 }
 
-    public void deleteChat(int chatId, String token) {
+    public void deleteChat(String chatId, String token) {
         chatRepository.deleteChat(chatId, token);
 }
     public void ClearChats() {
