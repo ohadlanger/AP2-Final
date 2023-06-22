@@ -2,6 +2,7 @@ package com.example.whatsapp_application;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -52,29 +53,30 @@ public class MainActivity extends AppCompatActivity {
         EditText passwordEt = findViewById(R.id.passwordEt);
         Button registerBtn = findViewById(R.id.registerBtn);
 
-        registerBtn.setOnClickListener(view -> {
+        registerBtn.setOnClickListener(view -> { // on an connection attempt
             String username = usernameEt.getText().toString();
             String password = passwordEt.getText().toString();
             if (!username.isEmpty() && !password.isEmpty()) {
-                MutableLiveData<User> result = new MutableLiveData<>();
-                result.setValue(null);
+                MutableLiveData<User> result = new MutableLiveData<>(); //  user object to listen to
 
-                result.observe(this, new Observer<User>() {
+                result.observe(this, new Observer<User>() { //  handle when updated (found)
                     @Override
                     public void onChanged(User newValue) {
-                        if (newValue != null) {
-                            details.putExtra("user", (CharSequence) newValue);
+                        if (newValue != null) { //  user exists
+                            details.putExtra("username", newValue.getUsername());
+                            details.putExtra("displayname", newValue.getDisplayName());
+                            details.putExtra("picture", newValue.getProfilePic());
                             startActivity(details);
                             finishAffinity();
-                        } else {
+                        } else {    //  user does not exist
                             Toast.makeText(getApplicationContext(), "Invalid information. Try again!", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
 
-                VerifyLogin(username, password, result);
+                VerifyLogin(username, password, result);    //  check information
             }
-            else {
+            else {  //  not all fields were filled
                 Toast.makeText(getApplicationContext(), "Missing requirements. Try again!", Toast.LENGTH_SHORT).show();
             }
         });
@@ -84,17 +86,17 @@ public class MainActivity extends AppCompatActivity {
         if(!username.isEmpty() && !password.isEmpty()) {
             UserRepository userRepository = new UserRepository();
             LoginRepository loginRepository = new LoginRepository(getApplicationContext());
-            MutableLiveData<String> token = new MutableLiveData<>();
+            MutableLiveData<String> token = new MutableLiveData<>();    //  will receive the token from database
 
-            token.observe(this, new Observer<String>() {
+            token.observe(this, new Observer<String>() {    //  handle return of token
                 @Override
                 public void onChanged(String newValue) {
                     details.putExtra("token", newValue);
-                    userRepository.getUser(username, "Bearer " + newValue, user);
+                    userRepository.getUser(username, "Bearer " + newValue, user); // update user with token
                 }
             });
 
-            loginRepository.createToken(username, password, token);
+            loginRepository.createToken(username, password, token); //  request token
         }
     }
 }

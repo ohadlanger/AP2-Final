@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.whatsapp_application.entities.Message;
+import com.example.whatsapp_application.entities.ServerAddress;
 import com.example.whatsapp_application.room.MessageDao;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class MessageApi {
 
     public MessageApi(MessageDao messageDao) {
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:5000/")
+                .baseUrl(ServerAddress.getAddress())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         webServiceAPI = retrofit.create(WebServiceApi.class);

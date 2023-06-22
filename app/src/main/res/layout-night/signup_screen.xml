@@ -94,16 +94,24 @@
                     android:drawableStart="@drawable/person_icon"
                     android:hint="Displey name"/>
 
-                <Button
-                    android:id="@+id/pictureBtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:backgroundTint="#1E2861"
-                    android:padding="10sp"
-                    android:drawablePadding="8dp"
-                    android:drawableStart="@drawable/picture_icon"
-                    android:text="Upload picture"
-                    android:textColor="#a951d5"/>
+<!--                <Button-->
+<!--                    android:id="@+id/pictureBtn"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="50dp"-->
+<!--                    android:backgroundTint="#1E2861"-->
+<!--                    android:padding="10sp"-->
+<!--                    android:drawablePadding="8dp"-->
+<!--                    android:drawableStart="@drawable/picture_icon"-->
+<!--                    android:text="Upload picture"-->
+<!--                    android:textColor="#a951d5"/>-->
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/profilePic"
+                        android:layout_height="70dp"
+                        android:layout_width="70dp"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="10dp"
+                        android:src="@drawable/picture_icon"/>
 
             </LinearLayout>
 
@@ -118,7 +126,6 @@
                 android:backgroundTint="#1E2861"
                 android:padding="10sp"
                 android:drawablePadding="8dp"
-                android:drawableStart="@drawable/person_icon"
                 android:text="Register"
                 android:textColor="#a951d5"/>
 
