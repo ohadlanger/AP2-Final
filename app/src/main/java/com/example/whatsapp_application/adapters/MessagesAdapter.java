@@ -32,8 +32,8 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
 
         public MessagesViewHolder(@NonNull View itemView) {
             super(itemView);
-            messageText = itemView.findViewById(R.id.messageText);
-            messageTime = itemView.findViewById(R.id.messageTime);
+            messageText = itemView.findViewById(R.id.msgContent);
+            messageTime = itemView.findViewById(R.id.lastMessage_Time);
         }
     }
     private final LayoutInflater layoutInflater;

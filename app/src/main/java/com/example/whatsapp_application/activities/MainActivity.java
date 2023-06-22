@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
                             details.putExtra("username", newValue.getUsername());
                             details.putExtra("displayname", newValue.getDisplayName());
                             details.putExtra("picture", newValue.getProfilePic());
+
                             startActivity(details);
                             finishAffinity();
                         } else {    //  user does not exist
