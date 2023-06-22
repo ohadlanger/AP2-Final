@@ -62,7 +62,9 @@ public class MainActivity extends AppCompatActivity {
                 result.observe(this, new Observer<User>() { //  handle when updated (found)
                     @Override
                     public void onChanged(User newValue) {
+
                         if (newValue != null) { //  user exists
+                            MyApplication.setUser(newValue);
                             details.putExtra("username", newValue.getUsername());
                             details.putExtra("displayname", newValue.getDisplayName());
                             details.putExtra("picture", newValue.getProfilePic());
@@ -92,6 +94,8 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onChanged(String newValue) {
                     details.putExtra("token", newValue);
+                    // set token in MyApplication
+                    MyApplication.setToken("Bearer "+ newValue);
                     userRepository.getUser(username, "Bearer " + newValue, user); // update user with token
                 }
             });

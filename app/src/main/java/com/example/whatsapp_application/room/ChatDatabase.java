@@ -11,7 +11,7 @@ import com.example.whatsapp_application.entities.Chat;
 import com.example.whatsapp_application.entities.LoginDetail;
 import com.example.whatsapp_application.entities.Message;
 
-@Database(entities = {Chat.class, Message.class, LoginDetail.class}, version = 3)
+@Database(entities = {Chat.class, Message.class, LoginDetail.class}, version = 4)
 @TypeConverters({Converters.class})
     public abstract class ChatDatabase extends RoomDatabase {
     public abstract ChatDao chatDao();

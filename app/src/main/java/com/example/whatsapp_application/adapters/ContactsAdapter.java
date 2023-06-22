@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.whatsapp_application.R;
+import com.example.whatsapp_application.activities.onClickListener;
 import com.example.whatsapp_application.entities.Chat;
 import android.util.Base64;
 import android.graphics.Bitmap;
@@ -19,8 +20,9 @@ import java.util.List;
 
 public class ContactsAdapter  extends RecyclerView.Adapter<ContactsAdapter.ContactsViewHolder>{
 
-
-    public ContactsAdapter(Context context) {
+    private onClickListener listener;
+    public ContactsAdapter(Context context, onClickListener listener) {
+        this.listener = listener;
         layoutInflater = LayoutInflater.from(context);
     }
 
@@ -61,6 +63,16 @@ public class ContactsAdapter  extends RecyclerView.Adapter<ContactsAdapter.Conta
             holder.contactName.setText(current.getUser().getUsername());
             // set the image from a string to a bitmap convert to bitmap
             String image = current.getUser().getProfilePic();
+            // add listener to the contact
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(listener != null) {
+                        listener.onContactClick(current);
+                    }
+                }
+            });
+
             // convert the string to a bitmap
             if (false && image != null) {
                 byte[] decodedString = Base64.decode(image, Base64.DEFAULT);

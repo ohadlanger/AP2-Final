@@ -1,3 +1,5 @@
+package com.example.whatsapp_application.adapters;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,16 +19,16 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
     private static final int VIEW_TYPE_RECEIVED = 1;
     private static final int VIEW_TYPE_SENT = 2;
 
-    private Context context;
     private List<Message> messages;
 
     public MessagesAdapter(Context context) {
-        this.context = context;
+        layoutInflater = LayoutInflater.from(context);
+
     }
 
     public class MessagesViewHolder extends RecyclerView.ViewHolder {
-        private TextView messageText;
-        private TextView messageTime;
+        private final TextView messageText;
+        private final  TextView messageTime;
 
         public MessagesViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -34,19 +36,19 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
             messageTime = itemView.findViewById(R.id.messageTime);
         }
     }
+    private final LayoutInflater layoutInflater;
 
     @NonNull
     @Override
     public MessagesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(context);
 
+        View itemView;
         if (viewType == VIEW_TYPE_RECEIVED) {
-            View itemView = layoutInflater.inflate(R.layout.received_message_lay, parent, false);
-            return new MessagesViewHolder(itemView);
+            itemView = layoutInflater.inflate(R.layout.received_message_lay, parent, false);
         } else {
-            View itemView = layoutInflater.inflate(R.layout.sent_message_lay, parent, false);
-            return new MessagesViewHolder(itemView);
+            itemView = layoutInflater.inflate(R.layout.sent_message_lay, parent, false);
         }
+        return new MessagesViewHolder(itemView);
     }
 
     @Override
@@ -74,7 +76,6 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.Messag
             return VIEW_TYPE_SENT;
         }
     }
-
     public void setMessages(List<Message> messages) {
         this.messages = messages;
         notifyDataSetChanged();

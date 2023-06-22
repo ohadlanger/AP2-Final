@@ -1,5 +1,6 @@
 package com.example.whatsapp_application.activities;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -25,9 +26,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ContactsActivity extends AppCompatActivity {
+public class ContactsActivity extends AppCompatActivity implements onClickListener {
     private TextView UsernameView;
     private TextView displayNameView;
+    private  ContactsAdapter adapter;
+    private  ContactsViewModel contactsViewModel;
     private ImageView profilePic;
 
     @Override
@@ -57,12 +60,12 @@ public class ContactsActivity extends AppCompatActivity {
             Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
             profilePic.setImageBitmap(bitmap);
         }
-        ContactsViewModel contactsViewModel = new ViewModelProvider(this).get(ContactsViewModel.class);
+        contactsViewModel = new ViewModelProvider(this).get(ContactsViewModel.class);
 
         RecyclerView lstContacts = findViewById(R.id.lstContacts);
 
         // connect the recycler view to the adapter
-        final ContactsAdapter adapter = new ContactsAdapter(this);
+         adapter = new ContactsAdapter(this, this);
         // set the adapter
         lstContacts.setAdapter(adapter);
         // set the layout manager
@@ -73,5 +76,23 @@ public class ContactsActivity extends AppCompatActivity {
             // update the cached copy of the words in the adapter.
             adapter.setChats(chats);
         });
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Fetch the chats again to get updated data
+        contactsViewModel.getChats("Bearer " + MyApplication.getToken()).observe(this, chats -> {
+            adapter.setChats(chats);
+        });
+    }
+    @Override
+    public void onContactClick(Chat chat) {
+        Intent intent = new Intent(ContactsActivity.this, ChatActivity.class);
+        // Pass the necessary data to the ChatActivity
+        intent.putExtra("chatId", chat.getId());
+        intent.putExtra("displayname", chat.getUser().getDisplayName());
+        // Add more data if needed
+
+        startActivity(intent);
     }
 }

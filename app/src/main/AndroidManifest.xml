@@ -5,8 +5,10 @@
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
+
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".activities.MyApplication"
         android:allowBackup="true"
@@ -17,9 +19,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Whatsapp_Application"
-        tools:targetApi="31"
         android:usesCleartextTraffic="true"
-        >
+        tools:targetApi="31">
 
         <activity
             android:name=".activities.MainActivity"
@@ -40,11 +41,10 @@
         </activity>
         <activity
             android:name=".activities.ContactsActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".activities.ChatActivity"
-            android:exported="false"/>
+            android:exported="false" />
     </application>
 
 </manifest>

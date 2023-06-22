@@ -19,8 +19,9 @@ public class MessageViewModel extends ViewModel {
         this.messageRepository = new MessageRepository(MyApplication.getContext());
         messages = new MutableLiveData<>();
     }
-    public void createMessage(int chatId, String msg, String token) {
+    public LiveData<List<Message>> createMessage(String chatId, String msg, String token) {
         messageRepository.createMessage(chatId, msg, token, messages);
+        return messages;
     }
     public void ClearMessages() {
         messageRepository.ClearMessages();
@@ -28,7 +29,7 @@ public class MessageViewModel extends ViewModel {
     public MessageRepository getMessageRepository() {
         return messageRepository;
     }
-    public LiveData<List<Message>> getMessages(int chatId,String token) {
+    public LiveData<List<Message>> getMessages(String chatId,String token) {
         messageRepository.getAllMessages(chatId,token, messages);
         return messages;
     }

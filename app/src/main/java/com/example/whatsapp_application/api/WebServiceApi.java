@@ -6,6 +6,7 @@ import com.example.whatsapp_application.entities.CompressChat;
 import com.example.whatsapp_application.entities.DetailedChat;
 import com.example.whatsapp_application.entities.DetailedUser;
 import com.example.whatsapp_application.entities.Message;
+import com.example.whatsapp_application.entities.NewMessage;
 import com.example.whatsapp_application.entities.TokenRequest;
 import com.example.whatsapp_application.entities.User;
 
@@ -33,7 +34,7 @@ public interface WebServiceApi {
     Call<Void> deleteChat(@Path("id") String chatId, @Header("Authorization") String token);
 
     @POST("api/Chats/{id}/Messages")
-    Call<Message> createMessage(@Path("id") String chatId, @Body String msg , @Header("Authorization") String token);
+    Call<Message> createMessage(@Path("id") String chatId, @Body NewMessage msg , @Header("Authorization") String token);
 
     @GET("api/Chats/{id}/Messages")
     Call<List<Message>> getAllMessages(@Path("id") String chatId, @Header("Authorization") String token);

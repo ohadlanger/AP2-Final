@@ -9,7 +9,7 @@ import com.example.whatsapp_application.room.Converters;
 
 @Entity(tableName = "messages")
 public class Message {
-    @PrimaryKey()
+    @PrimaryKey(autoGenerate = true)
     private int PrimaryKey;
     private String id;
 

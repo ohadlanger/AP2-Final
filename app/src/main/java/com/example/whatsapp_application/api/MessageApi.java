@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.whatsapp_application.entities.Message;
+import com.example.whatsapp_application.entities.NewMessage;
 import com.example.whatsapp_application.room.MessageDao;
 
 import java.util.List;
@@ -31,7 +32,7 @@ public class MessageApi {
     }
 
     public void createMessage(String chatId, String msg, String token, MutableLiveData<List<Message>> messageData) {
-        Call<Message> call = webServiceAPI.createMessage(chatId, msg , token);
+        Call<Message> call = webServiceAPI.createMessage(chatId, new NewMessage(msg) , token);
         call.enqueue(new Callback<Message>() {
             @Override
             public void onResponse(Call<Message> call, Response<Message> response) {

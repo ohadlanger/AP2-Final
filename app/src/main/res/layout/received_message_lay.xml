@@ -14,7 +14,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
-            android:id="@+id/senderDisplayName"
+            android:id="@+id/msgContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="This is a test"
@@ -23,7 +23,6 @@
 
         <TextView
             android:id="@+id/lastMessage_Time"
-
             android:layout_marginStart="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
