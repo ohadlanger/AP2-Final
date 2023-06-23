@@ -14,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.util.Collections;
 
 import com.example.whatsapp_application.R;
 import com.example.whatsapp_application.adapters.MessagesAdapter;
@@ -70,19 +71,28 @@ public class ChatActivity extends AppCompatActivity {
                             return;
                         }
                         adapter.setMessages(messages);
-                        recyclerView.scrollToPosition(messages.size() - 1);
+
+                        recyclerView.scrollToPosition(adapter.getItemCount() - 1);
+
+                        // clean the text
+                        messageEditText.setText("");
                     }
             );
 
         });
+
+
+        // add contact button listen
+
         // Existing code...
         messageViewModel.getMessages(chatId, token).observe(this, messages -> {
             if (messages == null) {
                 Toast.makeText(getApplicationContext(), "Error loading messages", Toast.LENGTH_SHORT).show();
                 return;
             }
+//            Collections.reverse(messages); // Reverse the order of messages
             adapter.setMessages(messages);
-            recyclerView.scrollToPosition(messages.size() - 1);
+            recyclerView.scrollToPosition(adapter.getItemCount() - 1);
         });
     }
 }

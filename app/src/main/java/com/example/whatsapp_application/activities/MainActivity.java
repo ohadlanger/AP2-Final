@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
                             details.putExtra("username", newValue.getUsername());
                             details.putExtra("displayname", newValue.getDisplayName());
                             details.putExtra("picture", newValue.getProfilePic());
+                            MyApplication.setUser(newValue);
 
                             startActivity(details);
                             finishAffinity();
@@ -98,6 +99,8 @@ public class MainActivity extends AppCompatActivity {
                     // set token in MyApplication
                     MyApplication.setToken("Bearer "+ newValue);
                     userRepository.getUser(username, "Bearer " + newValue, user); // update user with token
+                    // get the user
+
                 }
             });
 

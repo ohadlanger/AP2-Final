@@ -50,12 +50,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_margin="20dp"
-                    android:background="@drawable/edittext_border"
                     android:layout_marginBottom="30dp"
-                    android:padding="10sp"
-                    android:drawablePadding="8dp"
+                    android:background="@drawable/edittext_border"
                     android:drawableStart="@drawable/person_icon"
-                    android:hint="Username"/>
+                    android:drawablePadding="8dp"
+                    android:hint="Username"
+                    android:padding="10sp" />
 
                 <EditText
                     android:id="@+id/passwordEt"

@@ -10,6 +10,7 @@ import com.example.whatsapp_application.entities.CompressChat;
 import com.example.whatsapp_application.entities.DetailedChat;
 import com.example.whatsapp_application.room.ChatDao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -55,7 +56,11 @@ public class ChatApi {
             }
         });
     }
-
+    private List<Chat> updateChatData(List<Chat> currentData, Chat newChat) {
+        List<Chat> updatedData = new ArrayList<>(currentData);
+        updatedData.add(newChat);
+        return updatedData;
+    }
 
     public void createChat(ChatRequest chatRequest, String token, MutableLiveData<List<Chat>> chatData) {
         Call<CompressChat> call = webServiceAPI.createChat(chatRequest, token);
@@ -68,7 +73,7 @@ public class ChatApi {
                         Chat chat = compressChat.toChat();
                         new Thread(() -> {
                             chatDao.insert(chat);
-                            chatData.postValue(chatDao.getAllChats());
+                            chatData.postValue(updateChatData(chatData.getValue(), chat));  // add chat to chatData
                         }).start();
                     }
                 }

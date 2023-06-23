@@ -8,6 +8,7 @@ import com.example.whatsapp_application.entities.Message;
 import com.example.whatsapp_application.entities.NewMessage;
 import com.example.whatsapp_application.room.MessageDao;
 
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -62,7 +63,9 @@ public class MessageApi {
                 new Thread(() -> {
                     messageDao.clear(chatId);
                     List<Message> messages = response.body();
+
                     if (messages != null) {
+                        Collections.reverse(messages);
                         for (Message message : messages)
                             message.setChatId(chatId);
                         messageDao.insertAll(messages.toArray(new Message[0]));

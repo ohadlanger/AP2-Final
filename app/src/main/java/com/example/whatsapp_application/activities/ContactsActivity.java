@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,7 +29,6 @@ import java.util.List;
 
 public class ContactsActivity extends AppCompatActivity implements onClickListener {
     private TextView UsernameView;
-    private TextView displayNameView;
     private  ContactsAdapter adapter;
     private  ContactsViewModel contactsViewModel;
     private ImageView profilePic;
@@ -38,28 +38,30 @@ public class ContactsActivity extends AppCompatActivity implements onClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.contacts_screen);
         // get the token from the activity that started this activity
-        String token = getIntent().getStringExtra("token");
-        String username = getIntent().getStringExtra("username");
-        String displayName = getIntent().getStringExtra("displayname");
-
-        String image = getIntent().getStringExtra("picture");
+//        String token = getIntent().getStringExtra("token");
+//        String username = getIntent().getStringExtra("username");
+//        String displayName = getIntent().getStringExtra("displayname");
+//
+//        String image = getIntent().getStringExtra("picture");
 //        UsernameView = findViewById(R.id.username);
 //        displayNameView = findViewById(R.id.displayName);
-        if (username == null || displayName == null || token == null) {
-            Toast.makeText(getApplicationContext(), "Error loading user", Toast.LENGTH_SHORT).show();
-            return;
-        }
+//        if (username == null || displayName == null || token == null) {
+//            Toast.makeText(getApplicationContext(), "Error loading user", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
 
         Toast.makeText(getApplicationContext(), "Password must be 8-24 characters", Toast.LENGTH_SHORT).show();
-//        UsernameView.setText(username);
-//        displayNameView.setText(displayName);
-        // set the profile pic
 
-        if (false && image != null) {
-            byte[] decodedString = Base64.decode(image, Base64.DEFAULT);
-            Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-            profilePic.setImageBitmap(bitmap);
-        }
+        TextView userNameView = findViewById(R.id.userNameTv);
+        userNameView.setText(MyApplication.getUserName());
+
+        // set the profile pic
+//
+//        if (false && image != null) {
+//            byte[] decodedString = Base64.decode(image, Base64.DEFAULT);
+//            Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+//            profilePic.setImageBitmap(bitmap);
+//        }
         contactsViewModel = new ViewModelProvider(this).get(ContactsViewModel.class);
 
         RecyclerView lstContacts = findViewById(R.id.lstContacts);
@@ -72,16 +74,23 @@ public class ContactsActivity extends AppCompatActivity implements onClickListen
         lstContacts.setLayoutManager(new LinearLayoutManager(this));
         // set the observer
 
-        contactsViewModel.getChats("Bearer " + token).observe(this, chats -> {
+        contactsViewModel.getChats("Bearer " + MyApplication.getToken()).observe(this, chats -> {
             // update the cached copy of the words in the adapter.
             adapter.setChats(chats);
+        });
+
+        ImageButton addContactButton = findViewById(R.id.addContactBtn);
+
+        addContactButton.setOnClickListener(v -> {
+            Intent intent = new Intent(ContactsActivity.this, AddContactActivity.class);
+            startActivity(intent);
         });
     }
     @Override
     protected void onResume() {
         super.onResume();
         // Fetch the chats again to get updated data
-        contactsViewModel.getChats("Bearer " + MyApplication.getToken()).observe(this, chats -> {
+        contactsViewModel.getChats(MyApplication.getToken()).observe(this, chats -> {
             adapter.setChats(chats);
         });
     }
