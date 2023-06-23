@@ -73,7 +73,8 @@ public class ChatApi {
                         Chat chat = compressChat.toChat();
                         new Thread(() -> {
                             chatDao.insert(chat);
-                            chatData.postValue(updateChatData(chatData.getValue(), chat));  // add chat to chatData
+                            if(chatData.getValue() != null)
+                                chatData.postValue(updateChatData(chatData.getValue(), chat));  // add chat to chatData
                         }).start();
                     }
                 }
@@ -108,5 +109,6 @@ public class ChatApi {
     public void deleteChat(String chatId, String token) {
         Call<Void> call = webServiceAPI.deleteChat(chatId, token);
     }
+
 }
 

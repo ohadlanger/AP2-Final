@@ -61,6 +61,14 @@ public class ContactsAdapter  extends RecyclerView.Adapter<ContactsAdapter.Conta
         if (chats != null) {
             final Chat current = chats.get(position);
             holder.contactName.setText(current.getUser().getUsername());
+            if(current.getLastMessage() != null) {
+                holder.lastMessage.setText(current.getLastMessage().getContent());
+                holder.lastMessageTime.setText(current.getLastMessage().getCreated());
+            }
+            else {
+                holder.lastMessage.setText("");
+                holder.lastMessageTime.setText("");
+            }
             // set the image from a string to a bitmap convert to bitmap
             String image = current.getUser().getProfilePic();
             // add listener to the contact
